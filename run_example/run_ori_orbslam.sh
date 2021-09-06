@@ -1,0 +1,1 @@
+rosrun orbslam3 rgbd_tum ../Vocabulary/ORBvoc.txt ../Examples/RGB-D/TUM1.yaml /home/zhaozhong/dataset/tum/rgbd_dataset_freiburg1_desk /home/zhaozhong/dataset/tum/rgbd_dataset_freiburg1_desk/associated.txt
