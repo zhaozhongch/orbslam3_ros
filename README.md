@@ -1,3 +1,44 @@
+# ORB-SLAM3 ROS wrapper
+Original ORBSLAM2/3 has rosnode but it stands alone, not in any ROS workspace, which makes us a little bit difficult to use some other ROS perperty. This package put the orbslam3 as a ROS package so you can use the genreal ROS way to compile and use it.  
+This orbslam3 wrapper is different from other current wrappaer like [WrapperOne](https://github.com/thien94/orb_slam3_ros_wrapper). The code has no difference than the original code. If you have ROS and can compile the original ORBSLAM3, then you should be able to compile this. Anything you change, you just `catkin_make` and recompile.  
+Note the ORBSLAM3 here uses original commit number `8ac600a` instead of the newest one because I found the newest version doesnt work with rgbd.  I am not sure if others work better or worse.  
+### Install 
+```
+mkdir -p catkin_ws/src
+cd catkin_ws/src
+git clone https://github.com/zhaozhongch/orbslam3_ros.git
+cd orbslam3_ros
+./build_thrid_party.sh
+cd ../..
+catkin_make
+```
+### Use 
+Run euroc dataset, run `roscore` first. Then
+```
+cd catkin_ws
+source devel/setup.bash
+rosrun orbslam3 ros_stereo_inertial src/orbslam3/Vocabulary/ORBvoc.txt src/orbslam3/Examples/Stereo-Inertial/EuRoC.yaml true
+```
+Then run the bag
+```
+rosbag play /home/zhaozhong/dataset/euroc/MH_03_medium.bag /cam0/image_raw:=/gray_image0 /cam1/image_raw:=/gray_image1 /imu0:=/gx5/imu/data
+```
+
+The none ROS version is also compiled, you can either use ROS or not to run it. For example, the rgbd using ros command
+```
+roscd orbslam3
+rosrun orbslam3 rgbd_tum Path_to_Vocabulary Path_to_Yaml path_to_dataset path_to_associated.txt
+```
+Or without ROS command, just find where is the `rgbd_tum` executable is
+```
+cd catkin_ws/devel/lib/orbslam3
+./rgbd_tum Path_to_Vocabulary Path_to_Yaml path_to_dataset path_to_associated.txt
+```
+
+### Publish Topic
+I develop this because I want to use the pose estimation from the ORBSLAM3 in each frame, so if you run the such as the `ros_stereo_inertial`, you can get the ROS topic `/tesse/odom`. However, I didnt to too much to publish the sparse map or tf but it shouldnt be too hard to do so. You can use this as a base to develop and publish the information you want.
+
+
 # ORB-SLAM3
 
 ### V0.4: Beta version, 21 April 2021
