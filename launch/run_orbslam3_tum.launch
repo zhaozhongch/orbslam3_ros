@@ -1,0 +1,11 @@
+<launch>
+    <param name="ORBvoc_address" type="string" value="$(find orbslam3)/Vocabulary/ORBvoc.txt" />
+    <param name="yaml_address" type="string" value="$(find orbslam3)/Examples/RGB-D/TUM3_ros.yaml" />
+    <param name="show_orbslam_UI" type="bool" value="true" />
+    
+    <param name="rgb_image_topic" type="string" value="/gray_image0" />
+    <param name="depth_image_topic" type="string" value="/depth" />
+    <param name="im_left_mask_topic" type="string" value="/image_seg0" />
+    <node type="ros_rgbd_remove_mask" pkg="orbslam3" name="ros_rgbd_remove_mask" output="screen">
+    </node>
+</launch>

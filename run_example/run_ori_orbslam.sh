@@ -1,0 +1,1 @@
+rosrun orbslam3 ros_stereo_remove_mask src/orbslam3/Vocabulary/ORBvoc.txt src/orbslam3/Examples/Stereo/arpg_realsense_stereo.yaml true
