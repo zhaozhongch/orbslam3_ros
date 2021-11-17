@@ -8,8 +8,10 @@ Note the ORBSLAM3 here uses original commit number `8ac600a` instead of the newe
 ```
 mkdir -p catkin_ws/src
 cd catkin_ws/src
-git clone https://github.com/arpg/orbslam3_ros.git
-cd orbslam3_ros
+git clone https://github.com/arpg/orbslam3.git
+cd orbslam3
+#If you are using ubuntu20 with opencv4, checkout to the opencv4 version
+#git checkout orbslam3_ros_opencv4
 ./build_thrid_party.sh
 cd ../..
 catkin_make
