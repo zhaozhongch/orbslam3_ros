@@ -42,6 +42,7 @@
 
 #include "OptimizableTypes.h"
 
+#define CV_BGR2GRAY cv::COLOR_BGRA2GRAY 
 
 namespace ORB_SLAM3
 {
@@ -6640,9 +6641,9 @@ void Optimizer::LocalBundleAdjustment(KeyFrame* pMainKF,vector<KeyFrame*> vpAdju
             if(bShowImages)
             {
                 string strNameFile = pKFi->mNameFile;
-                cv::Mat imLeft = cv::imread(strNameFile, CV_LOAD_IMAGE_UNCHANGED);
+                cv::Mat imLeft = cv::imread(strNameFile, cv::IMREAD_UNCHANGED);
 
-                cv::cvtColor(imLeft, imLeft, CV_GRAY2BGR);
+                cv::cvtColor(imLeft, imLeft, cv::COLOR_GRAY2BGR);
 
                 int numPointsMono = 0, numPointsStereo = 0;
                 int numPointsMonoBad = 0, numPointsStereoBad = 0;

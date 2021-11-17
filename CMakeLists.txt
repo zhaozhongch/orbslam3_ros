@@ -10,8 +10,8 @@ ENDIF()
 
 MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall   -O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -w   -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w   -O3")
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -march=native")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 
@@ -32,7 +32,7 @@ endif()
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
-find_package(OpenCV 3.0)
+find_package(OpenCV 4.0)
 if(NOT OpenCV_FOUND)
   find_package(OpenCV 3.2)
   if(NOT OpenCV_FOUND)
