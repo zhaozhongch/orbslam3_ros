@@ -7,6 +7,6 @@
     <param name="im_left_topic" type="string" value="/gray_image0" />
     <param name="im_right_topic" type="string" value="/gray_image1" />
     <param name="im_left_mask_topic" type="string" value="/image_seg0" />
-    <node type="ros_stereo_remove_mask" pkg="orbslam3" name="ros_stereo_remove_mask" output="screen">
+    <node type="ros_stereo" pkg="orbslam3" name="ros_stereo" output="screen">
     </node>
 </launch>

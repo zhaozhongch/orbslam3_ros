@@ -43,7 +43,7 @@ class ImageGrabber
 {
 public:
     ImageGrabber(ORB_SLAM3::System* pSLAM,ros::NodeHandle& nh):mpSLAM(pSLAM){
-        pub_pose_current_frame0_ = nh.advertise<nav_msgs::Odometry>("/tesse/odom",10);
+        pub_pose_current_frame0_ = nh.advertise<nav_msgs::Odometry>("/oppo_bot/odom",10);
         pub_pose_current_frame1_ = nh.advertise<geometry_msgs::PoseStamped>("/orbslam3/odom",10);
     }
 
@@ -234,9 +234,9 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
     vector<float> q = ORB_SLAM3::Converter::toQuaternion(Rwc);
 
     nav_msgs::Odometry msg;
-    msg.header.frame_id = "world";
+    msg.header.frame_id = "map";
     msg.header.stamp = msgLeft->header.stamp;
-    msg.child_frame_id = "base_link_gt";
+    msg.child_frame_id = "camera";
     msg.pose.pose.orientation.w = q[3];
     msg.pose.pose.orientation.x = q[0];
     msg.pose.pose.orientation.y = q[1];
@@ -247,7 +247,7 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
     pub_pose_current_frame0_.publish(msg);
 
     geometry_msgs::PoseStamped p;
-    p.header.frame_id = "world";
+    p.header.frame_id = "map";
     p.header.stamp = msg.header.stamp;
     p.pose.orientation.w = q[3];
     p.pose.orientation.x = q[0];
@@ -258,15 +258,15 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
     p.pose.position.z = twc.ptr<float>(0)[2];
     pub_pose_current_frame1_.publish(p);
 
-    geometry_msgs::TransformStamped transform;
-    transform.header.frame_id = "world";
-    transform.child_frame_id = "base_link_gt";
-    transform.header.stamp = msgLeft->header.stamp;
-    transform.transform.rotation = msg.pose.pose.orientation;
-    transform.transform.translation.x = msg.pose.pose.position.x;
-    transform.transform.translation.y = msg.pose.pose.position.y;
-    transform.transform.translation.z = msg.pose.pose.position.z;
-    br_.sendTransform(transform);
+    // geometry_msgs::TransformStamped transform;
+    // transform.header.frame_id = "map";
+    // transform.child_frame_id = "camera";
+    // transform.header.stamp = msgLeft->header.stamp;
+    // transform.transform.rotation = msg.pose.pose.orientation;
+    // transform.transform.translation.x = msg.pose.pose.position.x;
+    // transform.transform.translation.y = msg.pose.pose.position.y;
+    // transform.transform.translation.z = msg.pose.pose.position.z;
+    // br_.sendTransform(transform);
 }
 
 
